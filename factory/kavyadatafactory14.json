@@ -1,0 +1,9 @@
+{
+	"name": "kavyadatafactory14",
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6c5d007c-5a21-43b0-9cd0-6ae4c834d794",
+		"tenantId": "27282fdd-4c0b-4dfb-ba91-228cd83fdf71"
+	}
+}
