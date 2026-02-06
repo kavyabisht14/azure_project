@@ -23,7 +23,7 @@
 				}
 			},
 			{
-				"name": "Get_Files",
+				"name": "Get_files",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
@@ -63,7 +63,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get_Files",
+						"activity": "Get_files",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -72,7 +72,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get_Files').output.childItems\n",
+						"value": "@activity('Get_files').output.childItems\n",
 						"type": "Expression"
 					},
 					"activities": [
@@ -94,8 +94,6 @@
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
-										"wildcardFolderPath": "data",
-										"wildcardFileName": "*.csv",
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
@@ -106,10 +104,6 @@
 									"type": "AzureSqlSink",
 									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": false,
-									"tableOption": {
-										"value": "@replace(item().name, '.csv', '')",
-										"type": "Expression"
-									},
 									"disableMetricsCollection": false
 								},
 								"enableStaging": false,
@@ -124,14 +118,26 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DelimitedText1",
-									"type": "DatasetReference"
+									"referenceName": "DelimitedText2",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
 									"referenceName": "AzureSqlTable1",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"tableName": {
+											"value": "@replace(item().name,'.csv','')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}

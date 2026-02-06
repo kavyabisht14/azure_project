@@ -5,12 +5,45 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"tableName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Close",
+				"type": "varchar"
+			},
+			{
+				"name": "High",
+				"type": "varchar"
+			},
+			{
+				"name": "Low",
+				"type": "varchar"
+			},
+			{
+				"name": "Open",
+				"type": "varchar"
+			},
+			{
+				"name": "Volume",
+				"type": "varchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "MSFT"
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
